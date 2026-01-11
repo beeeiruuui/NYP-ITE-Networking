@@ -1,0 +1,14 @@
+# Enter the hosts or devices for Ansible playbooks
+
+HQ ansible_user=admin ansible_password=cisco123 ansible_host=10.10.0.97     #VLAN1
+#HQ ansible_user=admin ansible_password=cisco123 ansible_host=10.10.0.105    #VLAN99
+Branch1 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.10.2
+Branch2 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.10.6
+
+HQS1 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.0.102     #VLAN1
+Branch1S2 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.1.46  #VLAN1
+Branch2S3 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.2.166 #VLAN1
+
+#HQS1 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.0.106          #VLAN99
+#Branch1S2 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.1.50     #VLAN99
+#Branch2S3 ansible_user=admin ansible_password=cisco123 ansible_host=10.10.2.170    #VLAN99

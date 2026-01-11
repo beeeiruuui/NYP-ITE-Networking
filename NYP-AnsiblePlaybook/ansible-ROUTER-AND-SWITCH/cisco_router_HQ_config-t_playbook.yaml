@@ -1,0 +1,221 @@
+---
+- name: CONFIGURE TERMINAL
+  hosts: HQ
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: false
+  connection: local
+
+  tasks:
+   - name: SET Interfaces
+     ios_config:
+       lines:
+         - interface s0/1/0
+         - ip address 10.10.10.1 255.255.255.252
+         - No shut
+         - Interface s0/1/1
+         - ip address 10.10.10.5 255.255.255.252
+         - No shut
+         - Interface G0/0/1
+         - Ip address 10.10.0.97 255.255.255.248
+         - No shut
+         - Interface G0/0/1.5
+         - encapsulation dot1Q 5
+         - Ip address 10.10.0.89 255.255.255.248
+         - No shut
+         - Interface G0/0/1.10
+         - encapsulation dot1Q 10
+         - Ip address 10.10.0.81 255.255.255.248
+         - No shut
+         - Interface G0/0/1.50
+         - encapsulation dot1Q 50
+         - Ip address 10.10.0.65 255.255.255.240 
+         - No shut
+         - Interface G0/0/1.60
+         - encapsulation dot1Q 60
+         - Ip address 10.10.0.1 255.255.255.192
+         - No shut
+         - Interface G0/0/1.99
+         - encapsulation dot1Q 99
+         - Ip address 10.10.0.105 255.255.255.248
+         - No shut
+         - Int loopback 1
+         - Ip address 10.0.0.1 255.255.255.252
+         - No shut
+         - Int loopback 2
+         - Ip address 10.0.0.5 255.255.255.252
+         - No shut
+         - Router ospf 1
+         - Network 10.10.0.0 0.0.0.63 area 0
+         - Network 10.10.0.64 0.0.0.15 area 0
+         - Network 10.10.0.80 0.0.0.7 area 0
+         - Network 10.10.0.88 0.0.0.7 area 0
+         - Network 10.10.0.104 0.0.0.7 area 0
+         - Network 10.10.0.96 0.0.0.7 area 0
+         - Network 10.10.10.0 0.0.0.3 area 0
+         - Network 10.10.10.4 0.0.0.3 area 0
+         - Network 10.0.0.0 0.0.0.3 area 0
+         - Network 10.0.0.4 0.0.0.3 area 0
+         - ip dhcp excluded-address 10.10.0.97 10.10.0.98
+
+   - name: SET DHCP POOL 5
+     ios_config:
+       parents: "ip dhcp pool VLAN_5"
+       lines:
+         - network 10.10.0.88 255.255.255.248
+         - default-router 10.10.0.89
+         - dns-server 10.10.0.90
+   - name: SET DHCP POOL 10
+     ios_config:
+       parents: "ip dhcp pool VLAN_10"
+       lines:
+         - network 10.10.0.80 255.255.255.248
+         - default-router 10.10.0.81
+         - dns-server 10.10.0.90
+   - name: SET DHCP POOL 50
+     ios_config:
+       parents: "ip dhcp pool VLAN_50"
+       lines:
+         - network 10.10.0.64 255.255.255.240
+         - default-router 10.10.0.65
+         - dns-server 10.10.0.90
+   - name: SET DHCP POOL 60
+     ios_config:
+       parents: "ip dhcp pool VLAN_60"
+       lines:
+         - network 10.10.0.0 255.255.255.192
+         - default-router 10.10.0.1
+         - dns-server 10.10.0.90
+   - name: SET DHCP POOL 99
+     ios_config:
+       parents: "ip dhcp pool VLAN_99"
+       lines:
+         - network 10.10.0.104 255.255.255.248
+         - default-router 10.10.0.105
+         - dns-server 10.10.0.90
+   - name: SET DHCP POOLS SSHHQ
+     ios_config:
+       parents: "Ip dhcp pool SSHHQ"
+       lines:
+         - network 10.10.0.96 255.255.255.248
+         - default-router 10.10.0.97
+         - dns-server 10.10.0.90
+
+   - name: Configure Syslog Server
+     ios_config:
+       lines:
+          - logging host 10.10.0.105
+          - logging trap informational
+          - logging facility local7
+          - logging console
+
+   - name: Set NTP Server
+     ios_config: 
+       lines:
+         - ntp master 5
+         - clock timezone GMT +8
+         - ntp authenticate
+
+
+
+
+
+# en
+# clock set 13:00:00 6 Feb 2024
+# Config t
+# clock timezone GMT +8
+# ntp master 5
+# ntp authenticate
+# logging host 10.10.0.99
+# logging trap informational
+# logging facility local7
+# logging console
+# Hostname HQ
+# interface s0/1/0
+# ip address 10.10.10.1 255.255.255.252
+# No shut
+# Interface s0/1/1
+# ip address 10.10.10.5 255.255.255.252
+# No shut
+# Interface G0/0/1
+# Ip address 10.10.0.97 255.255.255.248
+# ip address pool SSHHQ
+# No shut
+# Interface G0/0/1.5
+# encapsulation dot1Q 5
+# Ip address 10.10.0.89 255.255.255.248
+# ip address pool VLAN_5
+# No shut
+# Interface G0/0/1.10
+# encapsulation dot1Q 10
+# Ip address 10.10.0.81 255.255.255.248
+# ip address pool VLAN_10
+# No shut
+# Interface G0/0/1.50
+# encapsulation dot1Q 50
+# Ip address 10.10.0.65 255.255.255.240 
+# ip address pool VLAN_50
+# No shut
+# Interface G0/0/1.60
+# encapsulation dot1Q 60
+# Ip address 10.10.0.1 255.255.255.192
+# ip address pool VLAN_60
+# No shut
+# Interface G0/0/1.99
+# encapsulation dot1Q 99
+# Ip address 10.10.0.105 255.255.255.248
+# ip address pool VLAN_99
+# No shut
+# Int loopback 1
+# Ip address 10.0.0.1 255.255.255.252
+# No shut
+# Int loopback 2
+# Ip address 10.0.0.5 255.255.255.252
+# No shut
+# Router ospf 1
+# Network 10.10.0.0 0.0.0.63 area 0
+# Network 10.10.0.64 0.0.0.15 area 0
+# Network 10.10.0.80 0.0.0.7 area 0
+# Network 10.10.0.88 0.0.0.7 area 0
+# Network 10.10.0.104 0.0.0.7 area 0
+# Network 10.10.0.96 0.0.0.7 area 0
+# Network 10.10.10.0 0.0.0.3 area 0
+# Network 10.10.10.4 0.0.0.3 area 0
+# Network 10.0.0.0 0.0.0.3 area 0
+# Network 10.0.0.4 0.0.0.3 area 0
+# ip domain-name obr.com
+# crypto key generate rsa general-keys modulus 1024
+# ip ssh version 2
+# username admin privilege 15 password cisco123
+# line vty 0 15
+# login local
+# transport input all
+# line con 0
+# login local
+# transport input all
+# ip dhcp pool VLAN_5
+# network 10.10.0.88 255.255.255.248
+# default-router 10.10.0.89
+# Dns-server 10.10.0.99
+# ip dhcp pool VLAN_10
+# network 10.10.0.80 255.255.255.248
+# default-router 10.10.0.81
+# Dns-server 10.10.0.99
+# ip dhcp pool VLAN_50
+# network 10.10.0.64 255.255.255.240
+# default-router 10.10.0.65
+# Dns-server 10.10.0.99
+# ip dhcp pool VLAN_60
+# network 10.10.0.0 255.255.255.192
+# default-router 10.10.0.1
+# Dns-server 10.10.0.99
+# ip dhcp excluded-address 10.10.0.97 10.10.0.98
+# Ip dhcp pool SSHHQ
+# network 10.10.0.96 255.255.255.248
+# default-router 10.10.0.97
+# Dns-server 10.10.0.99
+# Ip dhcp pool VLAN_99
+# network 10.10.0.104 255.255.255.248
+# default-router 10.10.0.105
+# Dns-server 10.10.0.99
+

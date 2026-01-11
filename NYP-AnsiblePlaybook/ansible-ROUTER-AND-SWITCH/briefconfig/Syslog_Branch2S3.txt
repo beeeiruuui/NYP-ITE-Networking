@@ -1,0 +1,77 @@
+Syslog logging: enabled (0 messages dropped, 1 messages rate-limited, 0 flushes, 0 overruns, xml disabled, filtering disabled)
+
+No Active Message Discriminator.
+
+
+
+No Inactive Message Discriminator.
+
+
+    Console logging: level debugging, 69 messages logged, xml disabled,
+                     filtering disabled
+    Monitor logging: level debugging, 0 messages logged, xml disabled,
+                     filtering disabled
+    Buffer logging:  level debugging, 70 messages logged, xml disabled,
+                    filtering disabled
+    Exception Logging: size (4096 bytes)
+    Count and timestamp logging messages: disabled
+    File logging: disabled
+    Persistent logging: disabled
+
+No active filter modules.
+
+    Trap logging: level informational, 69 message lines logged
+        Logging to 10.10.2.170  (udp port 514, audit disabled,
+              link up),
+              4 message lines logged, 
+              0 message lines rate-limited, 
+              0 message lines dropped-by-MD, 
+              xml disabled, sequence number disabled
+              filtering disabled
+        Logging Source-Interface:       VRF Name:
+
+Log Buffer (4096 bytes):
+tate to down
+Apr  7 03:30:57.397: %LINK-3-UPDOWN: Interface GigabitEthernet0/6, changed state to down
+Apr  7 03:32:00.395: %LINK-3-UPDOWN: Interface GigabitEthernet0/10, changed state to up
+Apr  7 03:32:01.398: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/10, changed state to up
+Apr  7 03:34:19.643: %USB_CONSOLE-6-MEDIA_USB: Console media-type is USB.
+Apr  7 03:34:26.336: %LINK-5-CHANGED: Interface Vlan1, changed state to administratively down
+Apr  7 03:34:26.340: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
+Apr  7 03:34:26.700: SMI Director is not configured, disabling SMI
+Apr  7 03:34:26.700: disable_smartinstall_operation:Disabling SMI
+Apr  7 03:34:35.396: %USB_CONSOLE-6-MEDIA_RJ45: Console media-type is RJ45.
+Apr  7 03:38:27.211: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+Apr  7 03:38:28.211: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+Apr  7 03:38:36.411: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to up
+Apr  7 03:38:37.414: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+Apr  7 03:38:44.649: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+Apr  7 03:38:45.652: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+Apr  7 03:39:58.385: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to up
+Apr  7 03:39:59.388: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to up
+Apr  7 03:42:35.430: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to down
+Apr  7 03:42:38.667: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to down
+Apr  7 03:42:41.509: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to up
+Apr  7 03:42:42.508: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to up
+Apr  7 03:42:47.468: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to down
+Apr  7 03:42:48.471: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to down
+Apr  7 03:42:51.428: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to up
+Apr  7 03:42:52.431: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to up
+Apr  7 03:58:40.641: %USB_CONSOLE-6-MEDIA_USB: Console media-type is USB.
+Apr  7 03:59:04.010: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/10, changed state to down
+Apr  7 03:59:07.023: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/10, changed state to up
+Apr  7 03:59:14.276: %LINK-3-UPDOWN: Interface Vlan1, changed state to up
+Apr  7 03:59:14.279: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to up
+Apr  7 03:59:29.117: %SSH-5-ENABLED: SSH 1.99 has been enabled
+Apr  7 04:06:23.392: %USB_CONSOLE-6-MEDIA_RJ45: Console media-type is RJ45.
+Apr  7 04:09:52.649: %SYS-5-CONFIG_I: Configured from console by console
+Apr  7 04:28:11.976: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/3, changed state to down
+Apr  7 04:28:12.979: %LINK-3-UPDOWN: Interface GigabitEthernet0/3, changed state to down
+Apr  7 06:55:46.651: %USB_CONSOLE-6-MEDIA_USB: Console media-type is USB.
+Apr  7 06:56:35.392: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan99, changed state to down
+Apr  7 06:56:35.637: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (10.10.0.98)
+Apr  7 06:56:38.300: %SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 10.10.2.170 port 0 CLI Request Triggered
+Apr  7 06:56:38.905: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (10.10.0.98)
+Apr  7 06:56:38.909: %SYS-6-LOGGINGHOST_STARTSTOP: Logging to host 10.10.2.170 port 514 started - CLI initiated
+Apr  7 06:56:40.083: %SYS-6-CLOCKUPDATE: System clock has been updated from 06:56:40 UTC Fri Apr 7 2000 to 14:56:40 GMT Fri Apr 7 2000, configured from console by admin on vty0 (10.10.0.98).
+Apr  7 06:56:40.310: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (10.10.0.98)

@@ -1,0 +1,154 @@
+---
+- name: CONFIGURE IPv4 ADDRESSING
+  hosts: HQ
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: false
+  connection: local
+
+  tasks:
+   - name: SET IPv4 ADDRESS 
+     ios_config:
+       parents: "interface loopback1"
+       lines:
+         - ip address 10.10.1.1 255.255.255.0
+   - name: SHOW IPv4 INTERFACE BRIEF 
+     ios_command:
+       commands:
+         - show ip interface brief
+     register: output1
+
+   - name: Configure Syslog Server
+     ios_config:
+       commands:
+       lines:
+         - logging host 10.10.0.2 facility all
+         - logging console logging 
+   - name: Show syslog server
+     ios_command:
+       commands:
+         - show logging history
+     register: output2
+
+   - name: Set NTP Server
+     ios_config:
+       commands: 
+       lines:
+        - ntp server 10.10.0.2
+        - ntp authenticate md5 pa$$w0rd
+
+   - name: Show NTP 
+     ios_command:
+       commands:
+        - show ntp status
+     register: output3
+
+
+   - name: SAVE OUTPUT ./ios_configurations/
+     copy: 
+       content: "{{ output1.stdout[0] }}; \n\n {{ output2.stdout[0] }}; \n\n {{ output3.stdout[0] }}"
+       dest: "ios_configurations/IPv4_output_{{ inventory_hostname }}.txt"
+
+
+
+- name: CONFIGURE IPv4 ADDRESSING
+  hosts: Branch1
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: false
+  connection: local
+
+  tasks:
+   - name: SET IPv4 ADDRESS 
+     ios_config:
+       parents: "interface loopback1"
+       lines:
+         - ip address 10.10.1.1 255.255.255.0
+   - name: SHOW IPv4 INTERFACE BRIEF 
+     ios_command:
+       commands:
+         - show ip interface brief
+     register: output1
+
+   - name: Configure Syslog Server
+     ios_config:
+       commands:
+       lines:
+         - logging host 10.10.0.2 facility all
+         - logging console logging 
+   - name: Show syslog server
+     ios_command:
+       commands:
+         - show logging history
+     register: output2
+
+   - name: Set NTP Server
+     ios_config:
+       commands: 
+       lines:
+        - ntp server 10.10.0.2
+        - ntp authenticate md5 pa$$w0rd
+
+   - name: Show NTP 
+     ios_command:
+       commands:
+        - show ntp status
+     register: output3
+
+
+   - name: SAVE OUTPUT ./ios_configurations/
+     copy: 
+       content: "{{ output1.stdout[0] }}; \n\n {{ output2.stdout[0] }}; \n\n {{ output3.stdout[0] }}"
+       dest: "ios_configurations/IPv4_output_{{ inventory_hostname }}.txt"
+
+
+
+- name: CONFIGURE IPv4 ADDRESSING
+  hosts: Branch2
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: false
+  connection: local
+
+  tasks:
+   - name: SET IPv4 ADDRESS 
+     ios_config:
+       parents: "interface loopback1"
+       lines:
+         - ip address 10.10.1.1 255.255.255.0
+   - name: SHOW IPv4 INTERFACE BRIEF 
+     ios_command:
+       commands:
+         - show ip interface brief
+     register: output1
+
+   - name: Configure Syslog Server
+     ios_config:
+       commands:
+       lines:
+         - logging host 10.10.0.2 facility all
+         - logging console logging 
+   - name: Show syslog server
+     ios_command:
+       commands:
+         - show logging history
+     register: output2
+
+   - name: Set NTP Server
+     ios_config:
+       commands: 
+       lines:
+        - ntp server 10.10.0.2
+        - ntp authenticate md5 pa$$w0rd
+
+   - name: Show NTP 
+     ios_command:
+       commands:
+        - show ntp status
+     register: output3
+
+
+   - name: SAVE OUTPUT ./ios_configurations/
+     copy: 
+       content: "{{ output1.stdout[0] }}; \n\n {{ output2.stdout[0] }}; \n\n {{ output3.stdout[0] }}"
+       dest: "ios_configurations/IPv4_output_{{ inventory_hostname }}.txt"

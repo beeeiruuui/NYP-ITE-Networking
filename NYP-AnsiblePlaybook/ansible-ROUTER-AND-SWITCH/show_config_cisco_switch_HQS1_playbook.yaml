@@ -1,0 +1,62 @@
+---
+- name: AUTOMATIC BACKUP OF RUNNING-CONFIG
+  hosts: HQS1
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: false
+  connection: local
+  tasks:
+   - name: DISPLAYING THE RUNNING-CONFIG
+     ios_command:
+       commands:
+         - show running-config
+     register: config
+ 
+   - name: SAVE OUTPUT TO ./backups/
+     copy:
+       content: "{{ config.stdout[0] }}"
+       dest: "backups/show_run_{{ inventory_hostname }}.txt"
+
+   - name: DISPLAYING THE VERSION-CONFIG
+     ios_command:
+       commands:
+         - show version
+     register: version1
+
+   - name: SAVE OUTPUT TO ./backups/
+     copy:
+       content: "{{ version1.stdout[0] }}"
+       dest: "backups/show_version_{{ inventory_hostname }}.txt"
+
+   - name: Show NTP status
+     ios_command:
+       commands:
+         - show ntp status
+     register: output11
+
+   - name: Save NTP output to ./ios_configurations/
+     copy:
+       content: "{{ output11.stdout[0] }}"
+       dest: "briefconfig/NTP_{{ inventory_hostname }}.txt"
+
+   - name: Show syslog server
+     ios_command:
+       commands:
+         - show logging
+     register: output22
+
+   - name: Save syslog output to ./ios_configurations/
+     copy:
+       content: "{{ output22.stdout[0] }}"
+       dest: "briefconfig/Syslog_{{ inventory_hostname }}.txt"
+
+   - name: SHOW loopback INTERFACE BRIEF 
+     ios_command:
+       commands:
+         - show ip interface brief
+     register: output33
+
+   - name: SAVE OUTPUT ./ios_configurations/
+     copy: 
+       content: "{{ output33.stdout[0] }}"
+       dest: "briefconfig/Loopback {{ inventory_hostname }}.txt"

@@ -1,0 +1,115 @@
+---
+- name: CONFIGURE IPv4 ADDRESSING
+  hosts: HQS1
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  gather_facts: false
+  connection: local
+  tasks:
+   - name: SET Interface
+     ios_config:
+       lines:
+         - Int g0/10
+         - Switchport mode trunk
+         - Int g0/5
+         - Switchport mode access
+         - Switchport access vlan 5
+         - Int g0/1
+         - Switchport mode access
+         - Switchport access vlan 1
+         - Int vlan 1
+         - Ip address 10.10.0.102 255.255.255.248
+         - No shut
+         - Ip default-gateway 10.10.0.97
+         - Int vlan 99
+         - Ip address 10.10.0.106 255.255.255.248
+   
+   - name: SET VLAN 5
+     ios_config:
+       parents: "vlan 5"
+       lines:
+         - name ServerHQ
+         - state active
+   - name: SET VLAN 10
+     ios_config:
+       parents: "vlan 10"
+       lines:
+         - name ITdeptHQ
+         - state active
+   - name: SET VLAN 50
+     ios_config:
+       parents: "vlan 50"
+       lines:
+         - name RNDdeptHQ
+         - state active
+   - name: SET VLAN 60
+     ios_config:
+       parents: "vlan 60"
+       lines:
+         - name SalesdeptHQ
+         - state active
+   - name: SET VLAN 99
+     ios_config:
+       parents: "vlan 99"
+       lines:
+         - name ManagementHQ
+         - state active
+  
+   - name: Configure Syslog Server
+     ios_config:
+       lines:
+          - logging host 10.10.0.106
+          - logging trap informational
+          - logging facility local7
+          - logging console
+
+   - name: Set NTP Server
+     ios_config: 
+       lines:
+         - Ntp server 10.10.0.105
+         - clock timezone GMT +8
+         - ntp authenticate
+
+
+
+# en
+# Config t
+# clock timezone GMT +8
+# Ntp server 10.10.0.99
+# ntp authenticate
+# logging host 10.10.0.99
+# logging trap informational
+# logging facility local7
+# logging console
+# Hostname HQS1
+# vlan 5
+# Vlan 10
+# Vlan 50
+# Vlan 60
+# Vlan 99
+# Int g0/10
+# Switchport mode trunk
+# Int g0/5
+# Switchport mode access
+# Switchport access vlan 5
+# Int g0/1
+# Switchport mode access
+# Switchport access vlan 1
+# Int vlan 1
+# Ip address 10.10.0.102 255.255.255.248
+# No shut
+# Ip default-gateway 10.10.0.97
+# Int vlan 99
+# Ip address 10.10.0.106 255.255.255.248
+# No shut
+# ip domain-name obr.com
+# crypto key generate rsa general-keys modulus 1024
+# ip ssh version 2
+# username admin privilege 15 password cisco123
+# line vty 0 15
+# login local
+# transport input all
+# line con 0
+# login local
+# transport input all
+
